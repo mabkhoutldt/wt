@@ -326,6 +326,17 @@ protected:
    */
   virtual void createOAuthLoginView();
 
+#ifdef WT_HAS_SAML
+  /*! \brief Creates a widget to login using SAML.
+   *
+   * The default implementation adds an icon for each SAML service
+   * provider available.
+   *
+   * \sa createLoginView()
+   */
+  virtual void createSamlLoginView();
+#endif // WT_HAS_SAML
+
   /*! \brief Shows a dialog.
    *
    * This shows a dialog. The default method creates a standard WDialog,
@@ -373,6 +384,9 @@ private:
 
   void oAuthStateChange(OAuthProcess *process);
   void oAuthDone(OAuthProcess *process, const Identity& identity);
+#ifdef WT_HAS_SAML
+  void samlDone(Saml::Process *process, const Identity& identity);
+#endif // WT_HAS_SAML
   void updatePasswordLoginView();
 };
 
